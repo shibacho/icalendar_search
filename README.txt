@@ -1,24 +1,24 @@
- Copyright (C) 2011 by fantakeshi 
+ï»¿ Copyright (C) 2011 by fantakeshi 
  Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 
-icalŒ`®‚ÌƒJƒŒƒ“ƒ_[‚ğ‘½Œ¾Œê(å‚É“ú–{Œê)‚ÅŒŸõ‚·‚é‚½‚ß‚ÌPythonƒ‚ƒWƒ…[ƒ‹‚Å‚·B
-GoogleƒJƒŒƒ“ƒ_[‚Ì“ú–{Œê‚Å‚ÌŒŸõ‚ªM—p‚Å‚«‚È‚¢‚Ì‚Åì‚è‚Ü‚µ‚½B
-MITƒ‰ƒCƒZƒ“ƒX‚Åg—p‰Â”\‚Å‚·B
+icalå½¢å¼ã®ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚’å¤šè¨€èª(ä¸»ã«æ—¥æœ¬èª)ã§æ¤œç´¢ã™ã‚‹ãŸã‚ã®Pythonãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã§ã™ã€‚
+Googleã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã®æ—¥æœ¬èªã§ã®æ¤œç´¢ãŒä¿¡ç”¨ã§ããªã„ã®ã§ä½œã‚Šã¾ã—ãŸã€‚
+MITãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã§ä½¿ç”¨å¯èƒ½ã§ã™ã€‚
 
-Eg—p•û–@
-  src/example.py ‚ğŒ©‚Ä‚­‚¾‚³‚¢
+ãƒ»ä½¿ç”¨æ–¹æ³•
+  src/example.py ã‚’è¦‹ã¦ãã ã•ã„
 
-EƒCƒ“ƒXƒg[ƒ‹•û–@
-  ‰ğ“€‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚Å
+ãƒ»ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ–¹æ³•
+  è§£å‡ã—ãŸãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã§
 
   > sudo python setup.py install
 
-  ‚Æ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢BWindows‚Ìê‡‚Í
+  ã¨å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚Windowsã®å ´åˆã¯
 
   > python setup.py install
 
-  ‚Å‚·
+  ã§ã™
 
-EƒŠƒŠ[ƒX—š—ğ
+ãƒ»ãƒªãƒªãƒ¼ã‚¹å±¥æ­´
   2011/06/10 First Release
 
