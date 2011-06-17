@@ -25,6 +25,29 @@ def main():
 ###                             a_result.summary.encode('EUC_JP'))    ### for Linux 
 ###                             a_result.summary.encode('utf-8'))
 
+                                
+    ### URLからロードすることも出来る
+    ### You can load from iCalendar URL
+    cal_url = icalendar_search.CalendarSearch()
+    cal.load_url('https://www.google.com/calendar/ical/'\
+                 'ja.japanese%23holiday%40group.v.calendar.google.com/public/basic.ics')
+
+    ### 以下はload methodと同様
+    ### Same as using method load
+    results = cal.search(u'日')
+
+    ### それぞれの検索結果を表示する
+    ### 検索結果の文字列はunicode文字列で帰ってくることに注意
+    ### Show each results.
+    ### Note that each results summary is unicode string.
+    for a_result in results:
+        print "%s -> %s: %s" % (a_result.start_time.strftime('%Y/%m/%d %H:%M:%S'),
+                                a_result.end_time.strftime('%Y/%m/%d %H:%M:%S'),
+                                a_result.summary.encode('Shift_JIS')) ### for Windows
+###                             a_result.summary.encode('EUC_JP'))    ### for Linux 
+###                             a_result.summary.encode('utf-8'))
+
+
 if __name__ == '__main__':
     main()
 

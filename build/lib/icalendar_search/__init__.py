@@ -1,5 +1,4 @@
 ﻿# -*- coding: utf-8 -*-
-#
 # Copyright (C) 2011 by fantakeshi 
 # Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 # Author: fantakeshi
@@ -7,21 +6,14 @@
 # It follows the ``RFC 2445 http://www.ietf.org/rfc/rfc2445.txt (iCalendar) specification`` (as a part)
 
 __author__ = 'fantakeshi1@gmail.com'
-__version__ = '0.2'
+__version__ = '0.1'
 
 import datetime
 import re
-import urllib2
 
 import sys
 
 class CalendarSearch(object):
-    class CalendarParseError(Exception):
-        def __init__(self, reason):
-            self.reason = reason
-        def __str__(self):
-            return "Failed Calendar Parse reason: %s" % self.reason
-            
     """
     This is searching module for icalendar by a unicode string.
     This module focuses on just searching, not creating event, or etc...
@@ -38,11 +30,9 @@ class CalendarSearch(object):
         self._parse_string(string, encoding)
         return self
 
-    def load_url(self, url, encoding = 'utf-8'):
+    def load_from_url(self, url):
         self._path = url
-        result = urllib2.urlopen(url)
-        string = result.read()
-        self._parse_string(string, encoding)
+        ### TODO:Not Implemented:
         return self
 
     def clear(self):
@@ -76,20 +66,18 @@ class CalendarSearch(object):
                 event.start_time = self.get_datetime_from_dtstr(line)
             elif line.find('DTEND') >= 0:
                 event.end_time = self.get_datetime_from_dtstr(line)
-            elif line.find('CREATED') >= 0:
+            elif line.find('CREATED:') >= 0:
                 event.created = self.get_datetime_from_dtstr(line)
-            elif line.find('LAST-MODIFIED') >= 0:
+            elif line.find('LAST-MODIFIED:') >= 0:
                 event.last_modified = self.get_datetime_from_dtstr(line)
-            elif line.find('SUMMARY') >= 0:
+            elif line.find('SUMMARY:') >= 0:
                 line = unicode(line, encoding)
-                index = len('SUMMARY')
+                index = len('SUMMARY:')
                 event.summary = line[index:]
             elif line.find('DESCRIPTION:') >= 0:
                 line = unicode(line, encoding)
                 index = len('DESCRIPTION:')
                 event.description = line[index:]
-            elif line.find('<html>') >= 0:
-                raise self.CalendarParseError, "This is html file."
 
     """
     Search Calendar by a unicode string.
@@ -129,25 +117,13 @@ class CalendarEvent(object):
 
 import unittest
 class CalendarSearchTest(unittest.TestCase):
-    filename = 'test.ics'
-    url = 'https://www.google.com/calendar/ical/'\
-          'ja.japanese%23holiday%40group.v.calendar.google.com/public/basic.ics'
-    errorurl = 'http://www.google.com'
-    
     def setUp(self):
         self._calendar_search = CalendarSearch()
             
     def testLoadFile(self):
         self.assertRaises(TypeError, self._calendar_search.load, (1,2,3))
-        self.assertRaises(IOError, self._calendar_search.load, self.errorurl)
+        self.assertRaises(IOError, self._calendar_search.load, 'http://www.google.com')
         self.assert_(self._calendar_search.load('test.ics'))
-
-    def testLoadURL(self):
-        self.assertRaises(AttributeError, self._calendar_search.load_url, (1,2,3))
-        self.assertRaises(ValueError, self._calendar_search.load_url, self.filename)
-        self.assertRaises(CalendarSearch.CalendarParseError, self._calendar_search.load_url,
-                          self.errorurl)
-        self.assert_(self._calendar_search.load_url(self.url))
                 
     def testClear(self):
         self._calendar_search.clear()
@@ -155,18 +131,12 @@ class CalendarSearchTest(unittest.TestCase):
         self.assertEqual(self._calendar_search.search(u'あ'), [])
         self.assertEqual(self._calendar_search.search(u'日'), [])
                     
-    def testSearchFile(self):
-        self.assert_(self._calendar_search.load(self.filename))
+    def testSearch(self):
+        self.assert_(self._calendar_search.load('test.ics'))
         self.assertNotEqual(self._calendar_search.search(u'日'), [])
         results = self._calendar_search.search(u'日')
-        self.assertNotEqual(len(results), 0)
-
-    def testSearchURL(self):
-        self.assert_(self._calendar_search.load_url(self.url))
-        self.assertNotEqual(self._calendar_search.search(u'日'), [])
-        results = self._calendar_search.search(u'日')
-        self.assertNotEqual(len(results), 0)
-
+        self.assertEqual(len(results), 48)
+                
 ### below the test code.
 if __name__ == '__main__':
                 
